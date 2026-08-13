@@ -3,6 +3,7 @@ from selenium.webdriver.chrome.options import Options
 
 from pages.login_page import LoginPage
 from pages.checkout_page import CheckoutPage
+from pages.inventory_page import InventoryPage
 
 
 def test_complete_checkout():
@@ -19,9 +20,8 @@ def test_complete_checkout():
         login_page.login("standard_user", "secret_sauce")
 
         # Add first product to cart
-        driver.find_element(
-            "id", "add-to-cart-sauce-labs-backpack"
-        ).click()
+        inventory_page = InventoryPage(driver)
+        inventory_page.add_backpack_to_cart()
 
         # Checkout
         checkout_page = CheckoutPage(driver)
