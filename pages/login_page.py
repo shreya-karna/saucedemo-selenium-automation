@@ -6,6 +6,7 @@ class LoginPage:
     USERNAME = (By.ID, "user-name")
     PASSWORD = (By.ID, "password")
     LOGIN_BUTTON = (By.ID, "login-button")
+    ERROR_MESSAGE = (By.CSS_SELECTOR, "[data-test='error']")
 
     def __init__(self, driver):
         self.driver = driver
@@ -23,3 +24,6 @@ class LoginPage:
         self.enter_username(username)
         self.enter_password(password)
         self.click_login()
+
+    def get_error_message(self):
+        return self.driver.find_element(*self.ERROR_MESSAGE).text
