@@ -1,5 +1,6 @@
 from selenium.webdriver.common.by import By
-
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 class CheckoutPage:
 
@@ -30,7 +31,10 @@ class CheckoutPage:
         self.driver.find_element(*self.CONTINUE_BUTTON).click()
 
     def click_finish(self):
-        self.driver.find_element(*self.FINISH_BUTTON).click()
+        finish_button = WebDriverWait(self.driver, 10).until(
+            EC.element_to_be_clickable(self.FINISH_BUTTON)
+        )
+        finish_button.click()
 
     def is_order_complete(self):
         return self.driver.find_element(*self.COMPLETE_HEADER).is_displayed()
